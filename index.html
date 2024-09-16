@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Te Amo</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        h1 {
+            color: #ff4081;
+            font-size: 36px;
+        }
+        #mensaje {
+            font-size: 24px;
+            color: #ff4081;
+            margin-top: 20px;
+            display: none;
+        }
+        #imagen {
+            margin-top: 20px;
+            max-width: 50%; /* Asegura que la imagen no sea más ancha que su contenedor */
+            height: auto; /* Mantiene la proporción de la imagen */
+            display: none;
+        }
+        #imagen2 {
+            margin-top: 20px;
+            max-width: 50%; /* Asegura que la imagen no sea más ancha que su contenedor */
+            height: auto; /* Mantiene la proporción de la imagen */
+            display: none;
+        }
+        .heart {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: #ff4081;
+            transform: rotate(45deg);
+            animation: float 5s infinite ease-in-out;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ff4081;
+            position: absolute;
+        }
+        .heart::before {
+            top: -25px;
+            left: 0;
+        }
+        .heart::after {
+            left: 25px;
+            top: 0;
+        }
+        @keyframes float {
+            0% {
+                bottom: -100px;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100vh;
+                opacity: 0;
+            }
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            z-index: 2;
+        }
+        button:hover {
+            background-color: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    
+ 
+
+    <div class="container" >
+        <audio id="audio" loop>
+            <source src="/musica/Hasta la Raíz.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    
+        <button onclick="playAudio()">Reproducir Música</button>
+        <button onclick="pauseAudio()">Pausar Música</button>
+    
+        <script>
+            function playAudio() {
+                var audio = document.getElementById("audio");
+                audio.play().catch(function(error) {
+                    console.error("Error al intentar reproducir:", error);
+                });
+            }
+    
+            function pauseAudio() {
+                var audio = document.getElementById("audio");
+                audio.pause();
+            }
+        </script>
+        <h1>Para Ti Mi Amor, karina Quispe Aguilar</h1>
+        <button onclick="mostrarMensaje()">Si Me Amas Presiona el Boton</button>
+        <p id="mensaje"></p>
+        <!-- Coloca tu imagen aquí -->
+        <img id="imagen" src="//imagen/foto.jpg">
+    </div>
+
+    <script>
+        function crearCorazon() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function mostrarMensaje() {
+            const mensaje = document.getElementById("mensaje");
+            const imagen = document.getElementById("imagen");
+
+            const texto = "Karina, en cada latido de mi corazón, celebro lo hermosa y valiente que eres. Juntos enfrentaremos el mundo, luchando codo a codo por nuestros sueños y superando cualquier obstáculo que se nos presente. Prometo estar a tu lado en la salud y en la enfermedad, porque nuestro amor es la fuerza que nos llevará a salir adelante y a construir un futuro lleno de felicidad. Eres mi todo, y contigo siempre estaré. 💖";
+            let i = 0;
+            mensaje.style.display = "block";
+            imagen.style.display = "block";
+            mensaje.innerHTML = "";
+
+            const escribir = setInterval(() => {
+                if (i < texto.length) {
+                    mensaje.innerHTML += texto.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(escribir);
+                }
+            }, 100);
+        }
+
+        setInterval(crearCorazon, 500);
+    </script>
+</body>
+</html>
